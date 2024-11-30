@@ -4,10 +4,14 @@ from datetime import datetime
 from io import BytesIO
 import pdfkit  # For converting HTML to PDF
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='assets')
 
-# Read the CSV file into a global variable
+# Read the CSV file and ensure 'Patient ID' is treated as a string
 patient_data = pd.read_csv("human_vital_signs_dataset_2024.csv")
+patient_data['Patient ID'] = patient_data['Patient ID'].astype(str)  # Ensuring all IDs are strings
+
+# Number of patients per page
+PATIENTS_PER_PAGE = 20
 
 def parse_patient_data(data):
     # Extract and format the patient data (same function as before)
@@ -56,20 +60,48 @@ def parse_patient_data(data):
     <strong>Report Timestamp:</strong> {formatted_timestamp.strftime('%d %b %Y, %I:%M %p')} <br>
     <hr>
     """
-
     return report
 
 @app.route('/')
 def index():
-    # Show the first patient report (or create a list to select a patient)
-    first_patient = patient_data.iloc[0]  # for example, take the first row
-    report = parse_patient_data(first_patient)
-    return render_template('index.html', report=report)
+    # Get page number from query parameter, default to page 1 if not provided
+    page = int(request.args.get('page', 1))
+    
+    # Calculate the start and end indices for slicing the patient data
+    start = (page - 1) * PATIENTS_PER_PAGE
+    end = start + PATIENTS_PER_PAGE
+    patients_page = patient_data.iloc[start:end]
 
-@app.route('/generate_pdf')
-def generate_pdf():
-    first_patient = patient_data.iloc[0]  # for example, take the first row
-    report = parse_patient_data(first_patient)
+    # Get total number of patients to calculate the number of pages
+    total_patients = len(patient_data)
+    total_pages = (total_patients + PATIENTS_PER_PAGE - 1) // PATIENTS_PER_PAGE
+
+    # Pass the flag to show patient list
+    return render_template('index.html', patients=patients_page, page=page, total_pages=total_pages, show_patient_list=True)
+
+@app.route('/patient/<patient_id>')
+def patient_report(patient_id):
+    # Ensure the patient_id is treated as a string for consistent comparison
+    patient_id = str(patient_id)  # Convert patient_id to string
+    
+    # Check if patient_id exists in the DataFrame (which now has all Patient IDs as strings)
+    if patient_id not in patient_data['Patient ID'].values:
+        # Patient not found, return an error message or redirect to the home page
+        error_message = f"Patient with ID {patient_id} not found."
+        return render_template('index.html', error=error_message, show_patient_list=True, report=None)
+
+    # Find the patient data based on the selected Patient ID
+    patient = patient_data[patient_data['Patient ID'] == patient_id].iloc[0]
+    report = parse_patient_data(patient)
+    
+    # Pass the report and hide the patient list
+    return render_template('index.html', report=report, patient_id=patient_id, show_patient_list=False)
+
+@app.route('/generate_pdf/<patient_id>')
+def generate_pdf(patient_id):
+    # Find the patient data based on the selected Patient ID
+    patient = patient_data[patient_data['Patient ID'] == patient_id].iloc[0]
+    report = parse_patient_data(patient)  # Generate the report for PDF
     
     # Path to wkhtmltopdf executable (adjust this path if necessary)
     path_to_wkhtmltopdf = r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
@@ -81,7 +113,7 @@ def generate_pdf():
     pdf = pdfkit.from_string(report, False, configuration=config)
     
     # Send the PDF as a downloadable file
-    return send_file(BytesIO(pdf), download_name="patient_report.pdf", as_attachment=True)
+    return send_file(BytesIO(pdf), download_name=f"patient_{patient_id}_report.pdf", as_attachment=True)
 
 if __name__ == '__main__':
     app.run(debug=True)
