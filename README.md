@@ -161,12 +161,12 @@ Patient ID	Gender	Age	Weight (kg)	Height (m)	Heart Rate	...	MAP	HRV
 To start the Flask application:
 
 ```bash
-python app.py
+$python app.py
 Access the app at http://127.0.0.1:5000.
 ```
 
-**Authors**
+###**Authors**
 FullStack by [Aicha Lahnite]
 
-**License**
+###**License**
 This project is licensed under the MIT License. See the LICENSE file for details.
