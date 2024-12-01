@@ -67,14 +67,15 @@ Create a virtual environment and install the required packages:
 ```bash
 pip install -r requirements.txt
 Clone the Repository
-bash
-Copier le code
+```
+```bash
 git clone https://github.com/yourusername/patient-report-api.git  
 cd patient-report-api
-Install wkhtmltopdf
+```
+# Install wkhtmltopdf
 Follow the installation guide on the official wkhtmltopdf website. Ensure the executable is accessible via the system's PATH.
 
-Configuration
+**Configuration**
 Ensure the path to wkhtmltopdf is correctly set in your generate_pdf function. For example:
 
 python
