@@ -78,85 +78,102 @@ Follow the installation guide on the official wkhtmltopdf website. Ensure the ex
 **Configuration**
 Ensure the path to wkhtmltopdf is correctly set in your generate_pdf function. For example:
 
-python
+```python
 Copier le code
 path_to_wkhtmltopdf = r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
 For Linux/macOS, the default path is typically /usr/local/bin/wkhtmltopdf.
+```
 
-API Endpoints
+#*API Endpoints*
 1. Get List of Patients
 Request:
 
-Method: GET
-Query Parameters:
-page: Page number (default: 1).
+**Method:** GET
+**Query Parameters:**
+```
+page: Page number (default: 1)
+```
 Response:
 
-json
+```json
 Copier le code
 {
   "patients": ["12345", "67890", "11223"],
   "page": 1,
   "total_pages": 5
 }
-Example:
+```
 
-bash
+**Example:**
+
+```bash
 Copier le code
 curl "http://127.0.0.1:5000/patients?page=1"
-2. Generate Full Report for a Patient
-Request:
+```
 
-Method: GET
-URL Parameter: patient_id (Patient ID).
+**2. Generate Full Report for a Patient
+Request:**
+
+**Method:** GET
+**URL Parameter:** patient_id (Patient ID).
 Response:
-
+```
 json
 Copier le code
 {
   "report": "Patient 12345: Full medical report content."
 }
 Example:
+```
 
-bash
+```bash
 Copier le code
 curl "http://127.0.0.1:5000/patient_report/12345"
-3. Download PDF Report for a Patient
-Request:
+```
 
-Method: GET
-URL Parameter: patient_id (Patient ID).
+**3. Download PDF Report for a Patient
+Request:**
+
+**Method:** GET
+**URL Parameter:** patient_id (Patient ID).
 Response:
+```
 A downloadable PDF report.
+```
 
 Example:
 
-bash
+```bash
 Copier le code
 curl -O "http://127.0.0.1:5000/generate_pdf/12345"
-CSV File Format
+```
+**CSV File Format**
 The dataset (human_vital_signs_dataset_2024.csv) should have the following columns:
-
+```
 Patient ID	Gender	Age	Weight (kg)	Height (m)	Heart Rate	...	MAP	HRV
 12345	Male	45	70	1.75	72	...	90	55
-Error Handling
+```
+
+**Error Handling**
 404 Not Found: If patient_id does not exist:
-json
+```json
 Copier le code
 {
   "error": "Patient with ID 12345 not found."
 }
 500 Internal Server Error: For unexpected failures.
-Running the Application
+```
+
+**Running the Application**
 To start the Flask application:
 
-bash
-Copier le code
+```bash
 python app.py
 Access the app at http://127.0.0.1:5000.
+```
 
-Authors
+**Authors**
 FullStack by [Aicha Lahnite]
 
-License
+**License**
 This project is licensed under the MIT License. See the LICENSE file for details.
