@@ -1,54 +1,70 @@
-TawarAI
-AI-Powered Emergency Healthcare Report Generation System
-Abstract
-Background and Problem Statement
-In Morocco, emergency services are the primary entry point for many patients. Despite their importance, these services face inefficiencies in response times and resource allocation. Vital emergency cases account for only about 10% of visits, while non-urgent consultations make up 50%. This disparity, coupled with a shortage of skilled personnel and resources, delays diagnosis and treatment.
+# **TawarAI**  
+## **AI-Powered Emergency Healthcare Report Generation System**
 
-TawarAI addresses these issues by automating medical report generation from vital signs, improving the efficiency of emergency services, and enhancing overall patient care.
+---
 
-Impact and Proposed Solution
-TawarAI leverages the groqcloud API and Llama 3.1 70b model to analyze real-time patient data (e.g., vital signs) and generate medical reports. This process streamlines diagnosis, optimizes resource allocation, and minimizes documentation errors, ensuring more accurate and timely care for critical cases.
+### **Abstract**
 
-By automating report generation, TawarAI frees medical professionals to focus on patient care, supports early anomaly detection, and improves emergency healthcare services' overall efficiency.
+#### **Background and Problem Statement**  
+In Morocco, emergency services are the primary entry point for many patients. Despite their importance, these services face inefficiencies in response times and resource allocation. Vital emergency cases account for only about 10% of visits, while non-urgent consultations make up 50%. This disparity, coupled with a shortage of skilled personnel and resources, delays diagnosis and treatment.  
 
-Project Outcomes and Deliverables
-API:
-A REST API that processes vital sign data in CSV format and generates AI-driven medical reports. Future iterations will integrate real-time IoT data collection.
+TawarAI addresses these issues by automating medical report generation from vital signs, improving the efficiency of emergency services, and enhancing overall patient care.  
 
-Web Application:
-A user-friendly web app for uploading CSV files, viewing AI-generated reports, and downloading them in PDF format.
+#### **Impact and Proposed Solution**  
+TawarAI leverages the **groqcloud API** and **Llama 3.1 70b** model to analyze real-time patient data (e.g., vital signs) and generate medical reports. This process streamlines diagnosis, optimizes resource allocation, and minimizes documentation errors, ensuring more accurate and timely care for critical cases.  
 
-Report Generation:
-Detailed medical reports with diagnosis suggestions and actionable recommendations, analyzed from patient data.
+By automating report generation, TawarAI frees medical professionals to focus on patient care, supports early anomaly detection, and improves emergency healthcare services' overall efficiency.  
 
-Proof of Concept:
-A working prototype tested on Kaggle's patient vitals dataset, showcasing real-world application potential.
+---
 
-Table of Contents
-Requirements
-Installation
-Configuration
-API Endpoints
-Get List of Patients
-Generate Full Report
-Download PDF Report
-CSV File Format
-Error Handling
-Running the Application
-Authors
-License
-Requirements
-Python 3.x
-Flask
-pandas
-pdfkit
-wkhtmltopdf
-Installation
-Install Dependencies
-Create a virtual environment and install the required packages:
+### **Project Outcomes and Deliverables**
 
-bash
-Copier le code
+1. **API:**  
+   A REST API that processes vital sign data in CSV format and generates AI-driven medical reports. Future iterations will integrate real-time IoT data collection.
+
+2. **Web Application:**  
+   A user-friendly web app for uploading CSV files, viewing AI-generated reports, and downloading them in PDF format.
+
+3. **Report Generation:**  
+   Detailed medical reports with diagnosis suggestions and actionable recommendations, analyzed from patient data.
+
+4. **Proof of Concept:**  
+   A working prototype tested on Kaggle's patient vitals dataset, showcasing real-world application potential.
+
+---
+
+## **Table of Contents**
+
+- [Requirements](#requirements)  
+- [Installation](#installation)  
+- [Configuration](#configuration)  
+- [API Endpoints](#api-endpoints)  
+  - [Get List of Patients](#1-get-list-of-patients)  
+  - [Generate Full Report](#2-generate-full-report-for-a-patient)  
+  - [Download PDF Report](#3-download-pdf-report-for-a-patient)  
+- [CSV File Format](#csv-file-format)  
+- [Error Handling](#error-handling)  
+- [Running the Application](#running-the-application)  
+- [Authors](#authors)  
+- [License](#license)  
+
+---
+
+## **Requirements**
+
+- **Python 3.x**  
+- **Flask**  
+- **pandas**  
+- **pdfkit**  
+- **wkhtmltopdf**  
+
+---
+
+## **Installation**
+
+### **Install Dependencies**
+Create a virtual environment and install the required packages:  
+```bash
 pip install -r requirements.txt
 Clone the Repository
 bash
@@ -139,7 +155,7 @@ python app.py
 Access the app at http://127.0.0.1:5000.
 
 Authors
-Developed by [Aicha Lahnite]
+FullStack by [Aicha Lahnite]
 
 License
 This project is licensed under the MIT License. See the LICENSE file for details.
