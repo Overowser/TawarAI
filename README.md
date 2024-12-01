@@ -79,7 +79,6 @@ Follow the installation guide on the official wkhtmltopdf website. Ensure the ex
 Ensure the path to wkhtmltopdf is correctly set in your generate_pdf function. For example:
 
 ```python
-Copier le code
 path_to_wkhtmltopdf = r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
 For Linux/macOS, the default path is typically /usr/local/bin/wkhtmltopdf.
 ```
@@ -107,7 +106,6 @@ Copier le code
 **Example:**
 
 ```bash
-Copier le code
 curl "http://127.0.0.1:5000/patients?page=1"
 ```
 
@@ -117,17 +115,14 @@ Request:**
 **Method:** GET
 **URL Parameter:** patient_id (Patient ID).
 Response:
-```
-json
-Copier le code
+```json
 {
   "report": "Patient 12345: Full medical report content."
 }
-Example:
 ```
 
+Example:
 ```bash
-Copier le code
 curl "http://127.0.0.1:5000/patient_report/12345"
 ```
 
@@ -144,7 +139,6 @@ A downloadable PDF report.
 Example:
 
 ```bash
-Copier le code
 curl -O "http://127.0.0.1:5000/generate_pdf/12345"
 ```
 **CSV File Format**
@@ -157,7 +151,6 @@ Patient ID	Gender	Age	Weight (kg)	Height (m)	Heart Rate	...	MAP	HRV
 **Error Handling**
 404 Not Found: If patient_id does not exist:
 ```json
-Copier le code
 {
   "error": "Patient with ID 12345 not found."
 }
