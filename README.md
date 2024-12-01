@@ -57,8 +57,6 @@ pip install -r requirements.txt
 requirements.txt
 The following packages are required:
 
-makefile
-Copier le code
 annotated-types==0.5.0
 anyio==3.7.1
 cached-property==1.5.2
